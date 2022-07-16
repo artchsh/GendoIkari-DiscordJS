@@ -1,0 +1,2 @@
+npm i
+echo ALL SETTINGS HAS BEED APLIED
