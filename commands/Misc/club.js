@@ -20,11 +20,8 @@ module.exports = {
             return message.channel.send("Вы не состоите ни в каком клубе! Чтобы создать клуб напишите `.club создать`")
         }
 
-
         const keyClub = `${message.guild.id}-${memberClub}`
         const clubDB = new Enmap("Club");
-
-
 
         if (!args[0]) {
             message.channel.send("Введите: `.club создать`, `.club инфо`, `.club пригласить`, `.club выйти`")
@@ -53,12 +50,10 @@ module.exports = {
                         }
                     }
                 } else {
-                    console.log("club?")
                     message.channel.send("Вы уже состоите в клубе! Чтобы удалить клуб напишите `.club удалить`")
                 }
             } else if (args[0] === "инфо") {
                 if (memberClub === "-") {
-                    console.log("no club")
                     message.channel.send("Вы не состоите ни в каком клубе! Чтобы создать клуб напишите `.club создать`")
                 } else {
                     console.log("club?")
@@ -128,6 +123,7 @@ module.exports = {
                         embeds: [embed],
                         components: [row]
                     });
+                    // сообщение отправлено, но в index.js нужно придумать как отследить что кнопку пользователь нажал
                 }
             } else if (args[0] === "выйти") {
                 if (memberClub === "-") {
