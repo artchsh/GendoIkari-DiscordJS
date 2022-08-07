@@ -3,7 +3,6 @@ const {
     token
 } = require("./config.json");
 const Enmap = require("enmap");
-require('./website-express/express-server.js')
 
 
 const client = new discord.Client({

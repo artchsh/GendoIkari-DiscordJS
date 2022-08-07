@@ -53,7 +53,7 @@ module.exports = async (client) => {
     }
 
     const msInt = 5 * 60 * 1000 // minutes * 60 * 1000 = ms
-    setInterval(botStats, msInt);
+    //setInterval(botStats, msInt);
 
     function formatBytes(bytes) {
         if (bytes === 0) return "0 Bytes";
