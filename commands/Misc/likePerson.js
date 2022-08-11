@@ -1,7 +1,6 @@
 const discord = require('discord.js')
 const {
-    color,
-    timeoutBeforeDelete
+    color
 } = require('../../config.json');
 const Enmap = require("enmap");
 
@@ -23,12 +22,12 @@ module.exports = {
         //let isMention = args[0].match(MessageMentions.USERS_PATTERN)
         //if (!isMention) { return message.reply(`Это не пользователь.`)}
 
-        const mention = message.mentions.members.first().id
+        const mention = message.mentions.members.first().id;
+        let userTag = '';
         client.users.fetch(`${mention}`).then((user) => {
-            userTag = user.tag
-            userDB.set(key, `${userTag}`, "like")
+            userTag = user.tag;
         }).catch(console.error);
+        userDB.set(key, `${userTag}`, "like")
         message.channel.send("Вы успешно указали человека, который вам нравится!")
-
     }
 };

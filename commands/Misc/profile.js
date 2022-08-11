@@ -1,4 +1,4 @@
-const discord = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const {
     color
 } = require('../../config.json');
@@ -14,7 +14,8 @@ module.exports = {
     cooldown: 5,
     run: async (client, message, args) => {
         const userDB = new Enmap("Profile");
-        const key = `${message.author.id}`;
+        const user = message.mentions.users.first() || message.author
+        const key = `${user.id}`;
 
         let memberLevel = userDB.get(key, "level")
         let memberExp = userDB.get(key, "exp")
@@ -22,11 +23,14 @@ module.exports = {
         let memberVoiceMinutes = userDB.get(key, "voiceMinutes")
         let memberLike = userDB.get(key, "like")
         let memberClub = userDB.get(key, "club")
-        let memberAvatar = `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.jpeg`
+        //let memberAvatar = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpeg`
+        let memberAvatar = user.displayAvatarURL({ dynamic: true });
+        let memberUsername = user.username;
 
-        const profileEmbed = new discord.MessageEmbed()
+        const profileEmbed = new EmbedBuilder()
             .setColor(color)
             .setTitle(`Профиль пользователя ${message.author.username}`)
+            .setAuthor({ name: `${memberUsername}`, iconURL: `${memberAvatar}`})
             .setThumbnail(memberAvatar)
             .addFields({
                 name: 'XP',

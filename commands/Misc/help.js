@@ -15,19 +15,22 @@ module.exports = {
             const categories = readdirSync(`./commands/`)
 
             const emo = {
-                Misc: "❓ ・ ",
-                Util: "⚙ ・ ",
-                Owner: "👑 ・ ",
+                Misc: "misc ・ ",
+                Util: "util ・ ",
+                Developer: "dev ・ ",
+                Language: "lang ・ ",
+                Moderation: "mod ・ "
             };
     
-            const embed = new discord.MessageEmbed()
+            const embed = new discord.EmbedBuilder()
                 .setAuthor({ name: `❯ ・ Список команд - ${client.commands.size} команд`, iconURL: client.user.displayAvatarURL() })
                 .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
                 .setColor(config.color)
     
             for (const category of categories) {
                 const commands = client.commands.filter((cmd) => cmd.category === category).map((cmd) => `\`${cmd.name}\``).join(", ", "\n");
-                embed.fields.push({
+                let embedFields = embed.fields
+                embedFields.push({
                     name: `${emo[category]} ${(category)} команды`,
                     value: `> ${commands}`,
                     inline: false
@@ -43,7 +46,7 @@ module.exports = {
             const command = client.commands.get(args[0].toLowerCase()) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0].toLowerCase()));
 
             if (!command) {
-                const embed = new discord.MessageEmbed()
+                const embed = new discord.EmbedBuilder()
                         .setDescription(`Неверная команда! Используйте \`${config.prefix}помощь\` для всех моих команд`)
                         .setColor(config.color)
                 return message.channel.send({
@@ -51,7 +54,7 @@ module.exports = {
                 });
             }
 
-            const embed = new discord.MessageEmbed()
+            const embed = new discord.EmbedBuilder()
                 .setTitle("Детали команды:")
                 .setThumbnail('https://hzmi.xyz/assets/images/question_mark.png')
                 .addField("Команда:", command.name ? `\`${command.name}\`` : "Нет имени для этой команды.", true)

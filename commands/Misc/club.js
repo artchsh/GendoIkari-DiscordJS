@@ -1,14 +1,14 @@
-const discord = require('discord.js')
+const { EmbedBuilder} = require('discord.js')
 const {
     color
 } = require('../../config.json');
 const Enmap = require("enmap");
 
 module.exports = {
-
+    // поломана команда клуб, почему не работает понятия не имею
     name: "клуб",
     aliases: ["кл", "club"],
-    description: "Просмотр информации о вашем клубе, настройка, управление",
+    description: "Просмотр информации о вашем клубе, настройка, управление. (не работает)",
     category: "Misc",
     cooldown: 5,
     run: async (client, message, args) => {
@@ -57,11 +57,10 @@ module.exports = {
                     message.channel.send("Вы не состоите ни в каком клубе! Чтобы создать клуб напишите `.club создать`")
                 } else {
                     console.log("club?")
-                    // there code for club info
                     const clubCreator = clubDB.get(keyClub, "creator")
                     const clubMemberCount = clubDB.get(keyClub, "memberCount")
                     const clubMemberList = clubDB.get(keyClub, "members")
-                    const embedInfo = new discord.MessageEmbed()
+                    const embedInfo = new EmbedBuilder()
                         .setColor(color)
                         .setTitle(`Информация о клубе ${memberClub}`)
                         .addFields({
@@ -89,6 +88,7 @@ module.exports = {
                     if (!args[1]) {
                         return message.channel.send("Вам нужно указать пользователя. `.клуб пригласить <@пользователь>`")
                     }
+                    message.channel.send("Данная команда находится в стадии разработки. Пока что не работает.")
                     // there code for club invite
                     /*
                      * Club invite to person's dm than button click => assigned to new club, if in club already -1 from old club
@@ -114,7 +114,7 @@ module.exports = {
                             .setStyle('DANGER'),
                         );
 
-                    const embed = new discord.MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setColor(color)
                         .setTitle(`Вы были приглашены в клуб ${clubName}`)
 

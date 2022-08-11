@@ -125,3 +125,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# database files
+data/
+data/enmap.sqlite-shm
+data/enmap.sqlite-wal
+data/enmap.sqlite

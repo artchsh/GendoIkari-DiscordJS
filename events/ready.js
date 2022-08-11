@@ -1,11 +1,14 @@
 const discord = require('discord.js');
 const config = require("../config.json");
+
 const moment = require("moment");
 require("moment-duration-format");
 const ms = require("ms");
 const os = require("node:os");
 const packageJson = require("../package.json");
+
 const Enmap = require('enmap');
+const cron = require('node-cron');
 
 module.exports = async (client) => {
 
@@ -27,9 +30,7 @@ module.exports = async (client) => {
     setInterval(randomstatus, 15000);
 
     function botStats() {
-
         const duration = moment.duration(client.uptime).format("**D [D], H [H], m [M], s [S]**");
-
         const embed = new discord.MessageEmbed()
             .setTitle(`⚙ • System Statistics`)
             .setColor(config.color)
@@ -51,9 +52,6 @@ module.exports = async (client) => {
             embeds: [embed]
         })
     }
-
-    const msInt = 5 * 60 * 1000 // minutes * 60 * 1000 = ms
-    //setInterval(botStats, msInt);
 
     function formatBytes(bytes) {
         if (bytes === 0) return "0 Bytes";
@@ -110,6 +108,7 @@ module.exports = async (client) => {
                                     let channelId = guild.systemChannelId
                                     client.guilds.cache.get(`${guildID}`).channels.cache.get(`${channelId}`).send(`<@${member.id}>, поздравляю с днём рождения!`).catch(console.error)
                                     userDB.set(key, 1, "BDwas")
+                                    return console.log(`Happy birthday ${member.tag}!`)
                                 }
                             }
                         }
@@ -118,9 +117,11 @@ module.exports = async (client) => {
             });
         })
     }
-    setInterval(birthdaySystem, 14400);
 
-
+    cron.schedule('0 0 * * *', () => {
+        birthdaySystem();
+        console.log('Проверил дни рождения')
+    });
 
 
 

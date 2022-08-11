@@ -5,10 +5,10 @@ const {
 } = require('../../config.json');
 
 module.exports = {
-    name: "test",
-    aliases: ["test", "test"],
+    name: "invite-test",
+    aliases: ["i-t", "invtest"],
     description: "",
-    category: "Owner",
+    category: "Developer",
     cooldown: 0,
     run: async (client, message, args) => {
         const serverDB = new Enmap("serverSettings")

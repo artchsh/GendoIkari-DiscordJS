@@ -62,12 +62,14 @@ client.on('interactionCreate', interaction => {
         */
         let interactionId = interaction.customId
         switch(interactionId) {
-            case 'acceptInviteButton':
+            case 'acceptInviteButton': {
                 console.log("accept invite button received!")
                 break
-            case 'declineInviteButton':
+            }
+            case 'declineInviteButton':{
                 console.log("decline invite button received!")
                 break
+            }
         }
 
     }
