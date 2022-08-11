@@ -130,4 +130,7 @@ dist
 data/
 data/enmap.sqlite-shm
 data/enmap.sqlite-wal
-data/enmap.sqlite
+data/enmap.
+
+#
+.DS_Store
