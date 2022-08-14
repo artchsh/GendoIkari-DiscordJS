@@ -3,7 +3,6 @@ const config = require('../../config.json');
 const { readdirSync } = require('fs');
 
 module.exports = {
-
     name: "помощь",
     aliases: ["пом", "help"],
     description: "Получите список всех команд",
